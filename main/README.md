@@ -1,5 +1,5 @@
 # AppKeep
-<img src="logo.png"  width="100" height="100">
+<img src="./src/assets/logo/logo.png"  width="100" height="100">
 
 ## **Initial idea**
 
