@@ -1,6 +1,8 @@
 # AppKeep
 <img src="./logo_trans.png"  width="100" height="100">
 
+`npm run dev` to run it.
+
 ## **Initial idea**
 
 Keeping track of Job applications.
