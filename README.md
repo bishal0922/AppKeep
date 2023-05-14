@@ -1,7 +1,7 @@
 # AppKeep
 <img src="./logo_trans.png"  width="100" height="100">
 
-`npm run dev` to run it.
+`cd main` + `npm run dev` to run it.
 
 ![ss1.png](./ss_1.png)
 
