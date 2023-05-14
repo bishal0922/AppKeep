@@ -3,6 +3,8 @@
 
 `npm run dev` to run it.
 
+![ss1.png](./ss_1.png)
+
 ## **Initial idea**
 
 Keeping track of Job applications.
