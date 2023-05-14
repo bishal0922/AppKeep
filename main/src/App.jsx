@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useRef } from "react"
 import ApplicationList from "./pages/ApplicationList";
+import Navbar from "./pages/Navbar";
 import {v4 as uuidv4} from 'uuid';
 import { useEffect } from "react";
+import './App.css'
 
 const LOCAL_STORAGE_KEY = "AppKeep"
 
@@ -37,7 +39,8 @@ const App = () => {
     const newApplication = {
       id: uuidv4(), //create a unique id
       companyName:  name,
-      status: "Applied" 
+      status: "Applied",
+      date: new Date().toLocaleDateString('en-US', {month: "long", day: "numeric"})
     }
 
     console.log(newApplication);
@@ -53,16 +56,24 @@ const App = () => {
 
   return (
     <div className="App">
+      <Navbar />
+      <div className="application">
+        {/* Section to Add a new Application */}
+        <div className="application-input">
+          <input type="text" ref={companyName} placeholder="Company Name" />
+          <button onClick={handleAddApplication}> Add Application </button>
+          {/* add a section to show number of active application */}
+        </div>
 
-      <input type="text" ref={companyName} placeholder="Company Name"/>
-      <button onClick={handleAddApplication}> Add Application </button>
-      {/* add a section to show number of active application */}
+        <div className="application-list">
+          
+          {/* Section to Display the list of Applications */}
+          <ApplicationList applications={applications} />
+        </div>
 
-      {/* Section to Display the list of Applications */}
-      <ApplicationList applications={applications} />
-
+      </div>
     </div>
-  )
+  );
 }
 
 export default App;
