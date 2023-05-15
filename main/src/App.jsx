@@ -5,11 +5,14 @@ import Navbar from "./pages/Navbar";
 import {v4 as uuidv4} from 'uuid';
 import { useEffect } from "react";
 import './App.css'
+import ExportCSV from "./pages/ExportCSV";
+import ExportJSON from "./pages/ExportJSON";
 
 const LOCAL_STORAGE_KEY = "AppKeep"
 
 const App = () => {
-  const [applications, setApplications] = useState([]);
+  const [applications, setApplications] = useState([
+  ]);
   const companyName = useRef();
 
   //useEffect when the program runs first time
@@ -50,8 +53,6 @@ const App = () => {
       date: new Date().toLocaleDateString('en-US', {month: "long", day: "numeric"})
     }
 
-    console.log(newApplication);
-
     //update state with new application
     setApplications(prevApplications => {
       return [...prevApplications, newApplication]
@@ -60,6 +61,8 @@ const App = () => {
     //clear the input field
     companyName.current.value = "";
   }
+
+
 
   return (
     <div className="App">
@@ -75,7 +78,14 @@ const App = () => {
         <div className="application-list">
           
           {/* Section to Display the list of Applications */}
-          <ApplicationList applications={applications} />
+          <ApplicationList applications={applications} setApplications={setApplications}/>
+        </div>
+        <div className="export">
+          <ExportJSON applications={applications}/>
+        </div>
+
+        <div className="export-csv">
+          <ExportCSV applications={applications}/>
         </div>
 
       </div>
