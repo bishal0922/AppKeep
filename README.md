@@ -3,7 +3,8 @@
 
 `cd main` + `npm run dev` to run it.
 
-![ss1.png](./ss_1.png)
+![ss_2.png](./ss_2.png)
+![ss_1.png](./ss_1.png)
 
 ## **Initial idea**
 
