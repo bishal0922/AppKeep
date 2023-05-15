@@ -27,6 +27,13 @@ const App = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(applications))
   }, [applications])
 
+  //handle key down
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter'){
+      handleAddApplication();
+    }
+  }
+
   const handleAddApplication = () => {
     //get the company name from the input field
     const name = companyName.current.value;
@@ -60,7 +67,7 @@ const App = () => {
       <div className="application">
         {/* Section to Add a new Application */}
         <div className="application-input">
-          <input type="text" ref={companyName} placeholder="Company Name" />
+          <input type="text" ref={companyName} placeholder="Company Name" onKeyDown={handleKeyDown}/>
           <button onClick={handleAddApplication}> Add Application </button>
           {/* add a section to show number of active application */}
         </div>
