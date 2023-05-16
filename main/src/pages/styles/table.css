@@ -17,9 +17,12 @@
     width: 25%
 }
 .date-header{
-    width: 25%;
+    width: 22%;
 }
 
+.delete-header {
+    width: 3%;
+}
 
 .table-body tr > td{
     padding: 5px;
@@ -87,3 +90,19 @@
     border-bottom: #000000 1px solid;
 }
 
+.td-delete-button {
+    border: none;
+    background-color: rgb(221, 218, 218);
+
+}
+
+.td-last-updated-date-and-delete {
+    display: flex;
+    justify-content: space-between;
+}
+
+.td-last-updated-date-and-delete > button{
+    display: flex;
+    padding-top: 2px;
+    justify-content: space-between;
+}
