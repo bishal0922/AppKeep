@@ -70,7 +70,7 @@ const App = () => {
       <div className="application">
         {/* Section to Add a new Application */}
         <div className="application-input">
-          <input type="text" ref={companyName} placeholder="Company Name" onKeyDown={handleKeyDown}/>
+          <input type="text" ref={companyName} placeholder="Company Name (Ex Google...)" onKeyDown={handleKeyDown}/>
           <button onClick={handleAddApplication}> Add Application </button>
           {/* add a section to show number of active application */}
         </div>
