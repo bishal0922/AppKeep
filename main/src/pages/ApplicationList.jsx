@@ -70,6 +70,12 @@ const ApplicationList = ({applications, setApplications}) => {
                   value={row?.companyName}
                   className="company-name-input"
                   onChange={(e) => handleCompanyNameChange(e, rowIndex)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSaveButton(rowIndex);
+                      toggleEditMode();
+                    }
+                  }}
                 />
               ) : (
                 row?.companyName
