@@ -47,10 +47,6 @@ const ApplicationList = ({applications, setApplications}) => {
         setEditStatus(false);
     }
 
-    const handleEditStatusButton = (rowIndex) => {
-        setEditRow(rowIndex);
-        setEditStatus(true);
-    }
 
     const renderRow  = (row, rowIndex) => {
         const isRowInEditMode = editStatusList[rowIndex];
