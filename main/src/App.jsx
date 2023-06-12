@@ -12,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AppKeep />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="*" element={<h1>Not Found....</h1>} />
       </Routes>
     </div>
   );
