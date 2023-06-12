@@ -5,7 +5,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    /* padding: 0 20px; */
     height: 60px;
     font-size: 1.2rem;
     color: #fff;
@@ -23,6 +23,8 @@ nav img {
     margin: 0;
     padding: 0;
     text-decoration: none;
+    padding-left: 100px;
+    
 }
 
 .AppKeep-title a:hover{
@@ -39,6 +41,8 @@ nav ul {
 
 nav li {
     margin-right: 20px;
+    
+    padding-left: 5px;
 }
 
 .links {
