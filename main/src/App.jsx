@@ -1,10 +1,10 @@
 import Navbar from "./pages/Navbar";
 import AppKeep from "./pages/AppKeep";
-import Login from "./pages/Login";
-import './App.css'
+import Login from "./pages/auth/Login";
 import { Routes, Route } from "react-router-dom";
-import SignUp from "./pages/SignUp";
-import Auth from "./pages/Auth";
+import SignUp from "./pages/auth/SignUp";
+import Auth from "./pages/auth/Auth";
+import './App.css'
 
 const App = () => {
 
