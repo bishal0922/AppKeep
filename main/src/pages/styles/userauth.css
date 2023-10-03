@@ -11,7 +11,7 @@
 
 .login-container {
     background-color: #fff;
-    padding: 40px;
+    padding: 70px;
     border-radius: 8px;
     width: 300px;
     text-align: center;
@@ -21,7 +21,9 @@
 .auth-type-display {
     font-size: 1.8rem;
     color: rgb(11,56,118);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    margin-top: -20px
+
 }
 
 .type-field {
@@ -40,6 +42,7 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+    box-sizing: border-box;
 }
 
 .submit-button {
@@ -72,7 +75,7 @@
 
 .signup-container {
     background-color: #fff;
-    padding: 40px;
+    padding: 70px;
     border-radius: 8px;
     width: 300px;
     text-align: center;
@@ -82,7 +85,8 @@
 .signup-header {
     font-size: 1.8rem;
     color: rgb(11,56,118);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    margin-top: -20px
 }
 
 .input-field {
@@ -95,6 +99,7 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+    box-sizing: border-box;
 }
 
 .signup-button {

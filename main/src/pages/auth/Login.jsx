@@ -45,13 +45,11 @@ const Login = () => {
           </p>
 
           <div className='type-field'>
-            <p>Email</p>
-            <input type="email" placeholder="johndoe@email.com" value={email} onChange={handleEmailChange}/>
+            <input type="email" placeholder="Email" value={email} onChange={handleEmailChange}/>
           </div>
 
           <div className='type-field'>
-            <p>Password</p>
-            <input type="password" placeholder="Password123" value={password} onChange={handlePasswordChange}/>
+            <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
           </div>
         
           <div className='submit-button'>
