@@ -6,6 +6,7 @@ import '../styles/userauth.css';
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('') 
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value)
@@ -29,6 +30,10 @@ const Login = () => {
 
   }
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
 
   return (
     <div>
@@ -48,8 +53,19 @@ const Login = () => {
             <input type="email" placeholder="Email" value={email} onChange={handleEmailChange}/>
           </div>
 
-          <div className='type-field'>
-            <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange}/>
+          <div className="type-field" style={{ position: 'relative' }}>
+          <input 
+            type={showPassword ? "text" : "password"} 
+            placeholder="Password" 
+            value={password} 
+            onChange={handlePasswordChange}
+          />
+          <span 
+            style={{ position: 'absolute', right: 10, top: 10, cursor: 'pointer' }}
+            onClick={toggleShowPassword}
+          >
+            {showPassword ? 'Hide' : 'Show'}
+          </span>
           </div>
         
           <div className='submit-button'>
