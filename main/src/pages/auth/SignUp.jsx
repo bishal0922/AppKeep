@@ -1,8 +1,11 @@
 import {React, useState} from 'react'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {auth} from '../../firebase';
+import {useNavigate} from 'react-router-dom'
 
 const SignUp= () => {
+  const navigate= useNavigate()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('') 
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -45,7 +48,13 @@ const SignUp= () => {
     .then((userCredential) => {
       console.log(userCredential)
 
-      //NAVIGATE THE USER TO HOME PAGE AND LOAD THEIR DATA
+      //load their data
+
+
+      //redirect to homepage
+      navigate("/")
+
+
     }).catch((error) => {
       console.log("User creation failed")
       console.log(error)
