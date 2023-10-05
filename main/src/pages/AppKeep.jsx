@@ -1,94 +1,156 @@
 import { React, useState, useRef, useEffect } from "react";
-import {v4 as uuidv4} from 'uuid';
-import '../App.css'
+import { v4 as uuidv4 } from "uuid";
+import "../App.css";
 
 import ApplicationList from "./ApplicationList";
 import ExportCSV from "./ExportCSV";
 import ExportJSON from "./ExportJSON";
 
+import {auth} from '../firebase'
+import { db } from "../firebase";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import { onAuthStateChanged} from "firebase/auth";
 
-const LOCAL_STORAGE_KEY = "AppKeep"
+const LOCAL_STORAGE_KEY = "AppKeep";
+
 
 const AppKeep = () => {
+  const [applications, setApplications] = useState([]);
+  const [userUID, setUserUID] = useState(null)
+  const companyName = useRef();
 
-    const [applications, setApplications] = useState([
-    ]);
-    const companyName = useRef();
-  
-    //useEffect when the program runs first time
-    useEffect( () => {
-      const storedApplications = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-  
-      if (storedApplications){
-        setApplications(storedApplications);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserUID(user.uid);
+      } else {
+        setUserUID(null);
       }
-    }, [])
-  
-    //useEffect changes when there are changes to todos
-    useEffect( () => {
-      //store locally
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(applications))
-    }, [applications])
-  
-    //handle key down
-    const handleKeyDown = (e) => {
-      if (e.key === 'Enter'){
-        handleAddApplication();
-      }
+    });
+
+    // Cleanup the listener when the component unmounts
+    return () => unsubscribe();
+  }, []);
+
+
+
+   async function fetchApplications() {
+    const userApplicationsCollection = collection(db, "user", userUID, "applications");
+    const querySnapshot = await getDocs(userApplicationsCollection);
+    const fetchedApplications = [];
+    querySnapshot.forEach(doc => {
+      fetchedApplications.push(doc.data());
+    });
+    setApplications(fetchedApplications);
+  }
+
+  async function addApplication(newApplication) {
+    const userApplicationsCollection = collection(db, "user", userUID, "applications");
+    try {
+      await addDoc(userApplicationsCollection, newApplication)
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
-  
-    const handleAddApplication = () => {
-      //get the company name from the input field
-      const name = companyName.current.value;
-  
-      //verify it's not empty
-      if (name === ''){
-        return 
-      }
-  
-      const newApplication = {
-        id: uuidv4(), //create a unique id
-        companyName:  name,
-        status: "Applied",
-        date: new Date().toLocaleDateString('en-US', {month: "long", day: "numeric"})
-      }
-  
-      //update state with new application
-      setApplications(prevApplications => {
-        return [...prevApplications, newApplication]
-      })
-  
-      //clear the input field
-      companyName.current.value = "";
+  }
+
+  // useEffect when the program runs first time
+  useEffect(() => {
+    if (userUID){
+      fetchApplications();
+    }
+  }, [userUID]);
+
+
+
+  //useEffect when the program runs first time
+  useEffect(() => {
+    const storedApplications = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY)
+    );
+
+    if (storedApplications) {
+      setApplications(storedApplications);
+    }
+  }, []);
+
+  //useEffect changes when there are changes to todos
+  useEffect(() => {
+    //store locally
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(applications));
+  }, [applications]);
+
+  //handle key down
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleAddApplication();
+    }
+  };
+
+  const handleAddApplication = () => {
+    //get the company name from the input field
+    const name = companyName.current.value;
+
+    //verify it's not empty
+    if (name === "") {
+      return;
     }
 
+    const newApplication = {
+      id: uuidv4(), //create a unique id
+      companyName: name,
+      status: "Applied",
+      date: new Date().toLocaleDateString("en-US", {
+        month: "long",
+        day: "numeric",
+      }),
+    };
+
+    //update state with new application
+    setApplications((prevApplications) => {
+      return [...prevApplications, newApplication];
+    });
+
+    //add here to firebase
+    if (userUID){
+      addApplication(newApplication);
+    }
+
+    //clear the input field
+    companyName.current.value = "";
+  };
 
   return (
     <div>
-        <div className="application">
+      <div className="application">
         {/* Section to Add a new Application */}
         <div className="application-input">
-          <input type="text" ref={companyName} placeholder="Company Name (Ex Google...)" onKeyDown={handleKeyDown}/>
+          <input
+            type="text"
+            ref={companyName}
+            placeholder="Company Name (Ex Google...)"
+            onKeyDown={handleKeyDown}
+          />
           <button onClick={handleAddApplication}> Add Application </button>
           {/* add a section to show number of active application */}
         </div>
 
         <div className="application-list">
-          
           {/* Section to Display the list of Applications */}
-          <ApplicationList applications={applications} setApplications={setApplications}/>
+          <ApplicationList
+            applications={applications}
+            setApplications={setApplications}
+          />
         </div>
         <div className="export">
-          <ExportJSON applications={applications}/>
+          <ExportJSON applications={applications} />
         </div>
 
         <div className="export-csv">
-          <ExportCSV applications={applications}/>
+          <ExportCSV applications={applications} />
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AppKeep
+export default AppKeep;
