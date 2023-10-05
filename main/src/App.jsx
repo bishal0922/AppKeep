@@ -14,9 +14,9 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<AppKeep />} />
-        <Route path="/Login" element={<><Login /><Auth/></>} />
-        <Route path="/Register" element={<><SignUp/><Auth/></>} />
-        <Route path="/forgot-password" element={<><ForgotPassword/><Auth/></>} />
+        <Route path="/Login" element={<><Login /></>} />
+        <Route path="/Register" element={<><SignUp/></>} />
+        <Route path="/forgot-password" element={<><ForgotPassword/></>} />
         <Route path="*" element={<h1>Not Found....</h1>} />
       </Routes>
     </div>

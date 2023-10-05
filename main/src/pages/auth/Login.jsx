@@ -1,14 +1,34 @@
-import { React, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { React, useState, useEffect } from "react";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
 import "../styles/userauth.css";
-import ForgotPassword from "./ForgotPassword";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [authUser, setAuthUser] = useState(null)
+    
+useEffect(() => {
+  try {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+
+    // Clean up the listener when the component unmounts
+
+  } catch (error) {
+    console.error("Error in useEffect:", error);
+  }
+}, []);
+
+
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -37,6 +57,18 @@ const Login = () => {
 
   return (
     <div>
+    {authUser ? (
+    <div>
+          <div className="form-body">
+            <div className="login-container">
+              <p className="auth-type-display">
+                You're already logged in as {authUser.email}
+              </p>
+              <Link to="/">Go back to home</Link>
+            </div>
+          </div>
+        </div> 
+    ) : (
       <form onSubmit={handleSubmitButton} className="form-body">
         <div className="login-container">
           <h1 className="auth-type-display">Login</h1>
@@ -80,6 +112,8 @@ const Login = () => {
 
         </div>
       </form>
+
+    )}
     </div>
   );
 };

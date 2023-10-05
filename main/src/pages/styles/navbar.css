@@ -9,6 +9,8 @@ nav {
     height: 60px;
     font-size: 1.2rem;
     color: #fff;
+    position: absolute;
+    width: 100vw;
 }
 
 nav img {
