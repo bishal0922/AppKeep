@@ -2,13 +2,15 @@ import { React, useState, useEffect } from "react";
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import "../styles/userauth.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [authUser, setAuthUser] = useState(null)
+  const [authUser, setAuthUser] = useState(null);
+  const [loginError, setLoginError] = useState(null)
     
 useEffect(() => {
   try {
@@ -44,10 +46,12 @@ useEffect(() => {
       //function returns a promise and gets user credentials
       .then((userCredential) => {
         console.log(userCredential);
+        navigate("/")
       })
       .catch((error) => {
         console.log("User Login failed");
         console.log(error);
+        setLoginError("Failed to login. Please check your email and password")
       });
   };
 
@@ -121,6 +125,10 @@ useEffect(() => {
           <p className="forgot-password-link">
             <Link to="/forgot-password">Forgot Password?</Link>
           </p>
+            
+          <div className="error-message">
+            {loginError}
+          </div>
 
           <div className="submit-button">
             <button type="submit">Login</button>

@@ -120,27 +120,14 @@
     background-color: rgb(7, 8, 10);
 }
 
-
-.sign-out-button {
-  background-color: rgb(11, 56, 118);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 15px;
+.error-message {
+    color: #FF0000;             
+    padding: 10px 15px;        
+    border-radius: 4px;        
+    margin-top: 15px;          
+    margin-bottom: 15px;       
+    font-weight: bold;         
 }
-
-.sign-out-button:hover {
-  background-color: rgb(7, 8, 10);
-}
-
-.go-back-link {
-  margin-top: 10px; /* Add margin to push it down to a new line */
-}
-
-
 /*
 Forgot password
 */
