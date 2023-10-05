@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import "../styles/userauth.css";
 import { Link } from "react-router-dom";
@@ -55,6 +55,19 @@ useEffect(() => {
     setShowPassword(!showPassword);
   };
 
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setAuthUser(null);
+      })
+      .catch((error) => {
+        console.log("Sign Out failed");
+        console.log(error);
+      });
+  };
+
+
   return (
     <div>
     {authUser ? (
@@ -64,7 +77,10 @@ useEffect(() => {
               <p className="auth-type-display">
                 You're already logged in as {authUser.email}
               </p>
+              <button className="sign-out-button" onClick={handleSignOut}>SignOut</button>
+              <div className="go-back-link">
               <Link to="/">Go back to home</Link>
+              </div>
             </div>
           </div>
         </div> 

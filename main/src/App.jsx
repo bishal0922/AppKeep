@@ -3,7 +3,6 @@ import AppKeep from "./pages/AppKeep";
 import Login from "./pages/auth/Login";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./pages/auth/SignUp";
-import Auth from "./pages/auth/Auth";
 import './App.css'
 import ForgotPassword from "./pages/auth/ForgotPassword";
 
