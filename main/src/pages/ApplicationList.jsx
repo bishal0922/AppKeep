@@ -8,7 +8,6 @@ const ApplicationList = ({applications, setApplications}) => {
     const [editStatusList, setEditStatusList] = useState(Array(applications.length).fill(false));
     const statusRef = useRef();
 
-
     const handleStatusSelectDropdown = (e, rowIndex) => {
         const newApplications = [...applications];
         const newStatusReceived = e.target.value; 
@@ -23,7 +22,6 @@ const ApplicationList = ({applications, setApplications}) => {
 
         setEditRow(null);
     }
-
 
     const handleCompanyNameChange = (e, rowIndex) => {
         console.log(

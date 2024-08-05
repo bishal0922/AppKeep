@@ -13,7 +13,6 @@ import { onAuthStateChanged} from "firebase/auth";
 
 const LOCAL_STORAGE_KEY = "AppKeep";
 
-
 const AppKeep = () => {
   const [applications, setApplications] = useState([]);
   const [userUID, setUserUID] = useState(null)
@@ -31,7 +30,6 @@ const AppKeep = () => {
     // Cleanup the listener when the component unmounts
     return () => unsubscribe();
   }, []);
-
 
 
    async function fetchApplications() {
@@ -59,7 +57,6 @@ const AppKeep = () => {
       fetchApplications();
     }
   }, [userUID]);
-
 
 
   //useEffect when the program runs first time
@@ -122,7 +119,7 @@ const AppKeep = () => {
   return (
     <div>
       <div className="application">
-        {/* Section to Add a new Application */}
+        {/* New Application Input */}
         <div className="application-input">
           <input
             type="text"
@@ -131,20 +128,23 @@ const AppKeep = () => {
             onKeyDown={handleKeyDown}
           />
           <button onClick={handleAddApplication}> Add Application </button>
-          {/* add a section to show number of active application */}
+          {/*TODO: add a section to show number of active application */}
         </div>
 
+        {/* Application List */}
         <div className="application-list">
-          {/* Section to Display the list of Applications */}
           <ApplicationList
             applications={applications}
             setApplications={setApplications}
           />
         </div>
+
+        {/* JSON Export */}
         <div className="export">
           <ExportJSON applications={applications} />
         </div>
 
+        {/* CSV Export #Deprecated# */}
         <div className="export-csv">
           <ExportCSV applications={applications} />
         </div>

@@ -22,8 +22,6 @@ useEffect(() => {
       }
     });
 
-    // Clean up the listener when the component unmounts
-
   } catch (error) {
     console.error("Error in useEffect:", error);
   }

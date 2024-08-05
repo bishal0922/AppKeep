@@ -7,7 +7,8 @@ const ExportCSV = ({applications}) => {
 
         alert("Exporting CSV deprecated. Please use Export JSON instead.")
         return;
-        // Define the headers for the CSV file
+        // TODO: Deprecated, build a customer writer module 
+
         const headers = [
         { id: "id", title: "ID" },
         { id: "companyName", title: "Company Name" },

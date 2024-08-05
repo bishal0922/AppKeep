@@ -44,16 +44,11 @@ const SignUp= () => {
 
 
     createUserWithEmailAndPassword(auth, email, password)
+
     //function returns a promise and gets user credentials
     .then((userCredential) => {
-      console.log(userCredential)
-
-      //load their data
-
-
       //redirect to homepage
       navigate("/")
-
 
     }).catch((error) => {
       console.log("User creation failed")

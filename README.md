@@ -3,6 +3,9 @@
 
 `cd main` + `npm run dev` to run it.
 
+<br>
+
+![appkeep_architecture.png](./appkeep_architecture.png)
 ![ss_2.png](./ss_2.png)
 ![ss_1.png](./ss_1.png)
 
